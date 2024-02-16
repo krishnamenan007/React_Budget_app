@@ -1,11 +1,17 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AppContext } from '../context/AppContext';
 
 const Budget = () => {
-    const { budget,currency} = useContext(AppContext);
-    const [newBudget, setNewBudget] = useState(budget);
+    const { budget,currency, setNewBudget} = useContext(AppContext);
+    const [newBudget, setBudget] = useState(budget);
+
+    useEffect(() => {
+        setNewBudget(newBudget); // Update newBudget in context when it changes
+    }, [newBudget, setNewBudget]);
+
+
     const handleBudgetChange = (event) => {
-        setNewBudget(event.target.value);
+        setBudget(event.target.value);
     }
     return (
 <div className='alert alert-secondary'>
